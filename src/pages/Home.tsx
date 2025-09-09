@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useBodyId } from "../components/useBodyId";
+
+interface Project {
+    id: number;
+    name: string;
+    startDate: string;
+    status: string;
+    team: string[];
+    progress: number;
+}
 
 export default function Home() {
     const [query, setQuery] = useState("");
+    const [tableData, setTableData] = useState<Project[]>([]);
+    useBodyId('home-page');
 
-    const projects = [
+    const mockData: Project[] = [
         {
             id: 1,
-            name: "New admin Design",
+            name: "New Admin Design",
             startDate: "2019-05-02",
             status: "Completed",
             team: [
                 "https://bootdey.com/img/Content/avatar/avatar6.png",
                 "https://bootdey.com/img/Content/avatar/avatar7.png",
-                "https://bootdey.com/img/Content/avatar/avatar8.png",
+                "https://bootdey.com/img/Content/avatar/avatar8.png"
             ],
-            progress: 100,
+            progress: 100
         },
         {
             id: 2,
@@ -23,9 +35,9 @@ export default function Home() {
             status: "Pending",
             team: [
                 "https://bootdey.com/img/Content/avatar/avatar2.png",
-                "https://bootdey.com/img/Content/avatar/avatar1.png",
+                "https://bootdey.com/img/Content/avatar/avatar1.png"
             ],
-            progress: 78,
+            progress: 78
         },
         {
             id: 3,
@@ -36,13 +48,17 @@ export default function Home() {
                 "https://bootdey.com/img/Content/avatar/avatar3.png",
                 "https://bootdey.com/img/Content/avatar/avatar4.png",
                 "https://bootdey.com/img/Content/avatar/avatar5.png",
-                "https://bootdey.com/img/Content/avatar/avatar6.png",
+                "https://bootdey.com/img/Content/avatar/avatar6.png"
             ],
-            progress: 100,
-        },
+            progress: 100
+        }
     ];
 
-    const filteredProjects = projects.filter((p) =>
+    useEffect(() => {
+        setTableData(mockData);
+    }, []);
+
+    const filteredProjects = tableData.filter((p) =>
         p.name.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -113,46 +129,77 @@ export default function Home() {
             {/* Tabela de projetos */}
             <div className="row">
                 <div className="col-12">
-                    <div className="card shadow-sm">
-                        <div className="card-body table-responsive">
-                            <table
-                                className="table table-hover table-centered table-nowrap"
-                                aria-label="Lista de projetos"
-                            >
-                                <thead className="thead-light">
+                    <div className="modern-table-container card shadow-sm">
+                        <div className="table-header">
+                            <h1 className="table-title">Project Analytics Dashboard</h1>
+                            <p className="table-subtitle">Real-time project performance metrics</p>
+                        </div>
+                        
+                        <div className="table-wrapper">
+                                                        <table className="modern-table" role="table">
+                                <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Projects</th>
-                                        <th>Start Date</th>
-                                        <th>Status</th>
-                                        <th>Team</th>
-                                        <th>Progress</th>
-                                        <th>Action</th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Project</span>
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Start Date</span>
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Status</span>
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Team</span>
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Progress</span>
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div className="header-content">
+                                                <span>Actions</span>
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {filteredProjects.map((p) => (
-                                        <tr key={p.id}>
-                                            <td>{p.id}</td>
-                                            <td>{p.name}</td>
-                                            <td>
+                                        <tr key={p.id} className="table-row">
+                                            <td className="project-cell">
+                                                <div className="project-info">
+                                                    <span className="project-name">{p.name}</span>
+                                                    <span className="project-id">ID: {p.id}</span>
+                                                </div>
+                                            </td>
+                                            <td className="date-cell">
                                                 <time dateTime={p.startDate}>
                                                     {new Date(p.startDate).toLocaleDateString("pt-BR")}
                                                 </time>
                                             </td>
-                                            <td>
-                                                {p.status === "Completed" ? (
-                                                    <span className="text-success">
-                                                        <i className="fa fa-circle me-1"></i> Completed
-                                                    </span>
-                                                ) : (
-                                                    <span className="text-primary">
-                                                        <i className="fa fa-circle me-1"></i> Pending
-                                                    </span>
-                                                )}
+                                            <td className="status-cell">
+                                                <div className="status-badge">
+                                                    {p.status === "Completed" ? (
+                                                        <span className="text-success">
+                                                            <i className="fa fa-circle me-1"></i> Completed
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-primary">
+                                                            <i className="fa fa-circle me-1"></i> Pending
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </td>
-                                            <td>
-                                                <div className="d-flex">
+                                            <td className="team-cell">
+                                                <div className="team-avatars">
                                                     {p.team.map((avatar, idx) => (
                                                         <img
                                                             key={idx}
@@ -165,23 +212,24 @@ export default function Home() {
                                                     ))}
                                                 </div>
                                             </td>
-                                            <td style={{ minWidth: "150px" }}>
-                                                <p className="mb-1">
-                                                    Progress <span className="float-right">{p.progress}%</span>
-                                                </p>
-                                                <div className="progress" style={{ height: "6px" }}>
-                                                    <div
-                                                        className={`progress-bar ${p.progress === 100 ? "bg-success" : "bg-primary"
-                                                            }`}
-                                                        role="progressbar"
-                                                        style={{ width: `${p.progress}%` }}
-                                                        aria-valuenow={p.progress}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={100}
-                                                    ></div>
+                                            <td className="progress-cell">
+                                                <div className="progress-container">
+                                                    <div className="progress-bar" style={{ height: "6px" }}>
+                                                        <div
+                                                            className={`progress-fill ${p.progress === 100 ? "bg-success" : "bg-primary"}`}
+                                                            role="progressbar"
+                                                            style={{ width: `${p.progress}%` }}
+                                                            aria-valuenow={p.progress}
+                                                            aria-valuemin={0}
+                                                            aria-valuemax={100}
+                                                        >
+                                                            <div className="progress-glow"></div>
+                                                        </div>
+                                                    </div>
+                                                    <span className="progress-text">{p.progress}%</span>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td className="actions-cell">
                                                 <div className="d-flex gap-2">
                                                     <button className="btn btn-link text-success p-0">
                                                         <i className="fa fa-pencil"></i>
@@ -195,28 +243,6 @@ export default function Home() {
                                     ))}
                                 </tbody>
                             </table>
-
-                            {/* Paginação mockada */}
-                            <nav>
-                                <ul className="pagination justify-content-end">
-                                    <li className="page-item disabled">
-                                        <span className="page-link">Previous</span>
-                                    </li>
-                                    <li className="page-item active">
-                                        <span className="page-link">1</span>
-                                    </li>
-                                    <li className="page-item">
-                                        <a className="page-link" href="#">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li className="page-item">
-                                        <a className="page-link" href="#">
-                                            Next
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>

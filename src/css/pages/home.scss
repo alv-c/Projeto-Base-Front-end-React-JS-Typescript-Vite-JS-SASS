@@ -1,1 +1,400 @@
 @use './../includes/variaveis' as var;
+
+body#home-page {
+    background: #111;
+    min-height: 100dvh;
+
+    // SASS Variables
+    $primary-color: #0000004d;
+    $secondary-color: #f9b233;
+    $tertiary-color: #228b22;
+    $glass-blur: 20px;
+    $border-radius: 16px;
+    $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    $glow-intensity: 0 0 20px;
+    $shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+    $shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.2);
+
+    // Mixins
+    @mixin glass-effect {
+        background: $primary-color;
+        backdrop-filter: blur($glass-blur);
+        -webkit-backdrop-filter: blur($glass-blur);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @mixin neon-glow($color) {
+        box-shadow: $glow-intensity $color, inset 0 0 10px rgba($color, 0.2);
+    }
+
+    @mixin hover-transform {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    // Main Container
+    .modern-table-container {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        padding: 2rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        .table-header {
+            text-align: center;
+            margin-bottom: 3rem;
+
+            .table-title {
+                font-size: 3rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, $secondary-color, #fff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 0.5rem;
+                text-shadow: $glow-intensity rgba($secondary-color, 0.3);
+            }
+
+            .table-subtitle {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 1.2rem;
+                font-weight: 300;
+            }
+        }
+    }
+
+    // Table Wrapper
+    .table-wrapper {
+        @include glass-effect;
+        border-radius: $border-radius;
+        overflow: hidden;
+        box-shadow: $shadow-strong;
+        transition: $transition;
+
+        &:hover {
+            @include neon-glow(rgba($secondary-color, 0.2));
+            transform: translateY(-4px);
+        }
+    }
+
+    // Main Table
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+
+        // Table Header
+        thead {
+            background: linear-gradient(135deg, rgba($secondary-color, 0.2), rgba($tertiary-color, 0.1));
+
+            th {
+                padding: 1.5rem 1rem;
+                text-align: left;
+                font-weight: 600;
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.9);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-bottom: 2px solid rgba($secondary-color, 0.3);
+                position: relative;
+
+                .header-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    svg {
+                        color: $secondary-color;
+                    }
+                }
+
+                &:hover {
+                    background: rgba($secondary-color, 0.1);
+                    color: $secondary-color;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        // Table Body
+        tbody {
+            .table-row {
+                transition: $transition;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+                &:hover {
+                    background: rgba($secondary-color, 0.05);
+                    @include hover-transform;
+                    @include neon-glow(rgba($secondary-color, 0.1));
+
+                    .progress-fill {
+                        @include neon-glow($secondary-color);
+                    }
+                }
+
+                td {
+                    padding: 1.25rem 1rem;
+                    vertical-align: middle;
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 0.95rem;
+                    position: relative;
+
+                    &:first-child {
+                        border-top-left-radius: 8px;
+                        border-bottom-left-radius: 8px;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 8px;
+                        border-bottom-right-radius: 8px;
+                    }
+                }
+            }
+        }
+    }
+
+    // Specific Cell Styles
+    .project-cell {
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .project-name {
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.95);
+                font-size: 1rem;
+            }
+
+            .project-id {
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.5);
+                font-family: 'Monaco', monospace;
+            }
+        }
+    }
+
+    .status-cell {
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 24px;
+            @include glass-effect;
+            width: fit-content;
+
+            .status-icon {
+                &.active {
+                    color: $tertiary-color;
+                }
+
+                &.progress {
+                    color: $secondary-color;
+                }
+
+                &.completed {
+                    color: #10b981;
+                }
+
+                &.pending {
+                    color: #f59e0b;
+                }
+            }
+
+            span {
+                font-weight: 500;
+                font-size: 0.85rem;
+            }
+        }
+    }
+
+    // Progress Bar Styles
+    .progress-cell {
+        width: 200px;
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .progress-bar {
+                flex: 1;
+                height: 12px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+                @include glass-effect;
+
+                .progress-fill {
+                    height: 100%;
+                    background: linear-gradient(90deg, $secondary-color, $tertiary-color);
+                    border-radius: 6px;
+                    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    position: relative;
+
+                    .progress-glow {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 20px;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+                        animation: shimmer 2s infinite;
+                    }
+                }
+            }
+
+            .progress-text {
+                font-weight: 600;
+                color: $secondary-color;
+                font-size: 0.9rem;
+                min-width: 40px;
+                text-align: right;
+            }
+        }
+    }
+
+    .revenue-cell {
+        .revenue-amount {
+            font-weight: 700;
+            color: $tertiary-color;
+            font-size: 1.1rem;
+            text-shadow: $glow-intensity rgba($tertiary-color, 0.3);
+        }
+    }
+
+    .team-cell {
+        .team-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .team-count {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .team-label {
+                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.5);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+
+    .rating-cell {
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .rating-star {
+                color: $secondary-color;
+                fill: $secondary-color;
+            }
+
+            span {
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.9);
+            }
+        }
+    }
+
+    .category-cell {
+        .category-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba($tertiary-color, 0.2);
+            color: $tertiary-color;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba($tertiary-color, 0.3);
+            transition: $transition;
+
+            &:hover {
+                background: rgba($tertiary-color, 0.3);
+                @include neon-glow($tertiary-color);
+            }
+        }
+    }
+
+    // Animations
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    @keyframes pulse-glow {
+
+        0%,
+        100% {
+            box-shadow: $glow-intensity rgba($secondary-color, 0.2);
+        }
+
+        50% {
+            box-shadow: $glow-intensity rgba($secondary-color, 0.4);
+        }
+    }
+
+    // Responsive Design
+    @media (max-width: 1200px) {
+        .modern-table-container {
+            padding: 1rem;
+
+            .table-header .table-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .progress-cell {
+            width: 150px;
+        }
+
+        .modern-table th,
+        .modern-table td {
+            padding: 1rem 0.75rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .modern-table {
+            min-width: 800px;
+        }
+
+        .table-header .table-title {
+            font-size: 2rem;
+        }
+
+        .progress-cell {
+            width: 120px;
+
+            .progress-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+.card {
+    border: none;
+    margin-bottom: 24px;
+    box-shadow: 0 0 13px 0 rgba(236, 236, 241, .44);
+}

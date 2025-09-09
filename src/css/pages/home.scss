@@ -5,18 +5,16 @@ body#home-page {
     min-height: 100dvh;
     padding: 30px 0 50px;
 
-    // SASS Variables
     $primary-color: #0000004d;
-    $secondary-color: #f9b233;
+    $secondary-color: #002e17;
     $tertiary-color: #228b22;
+    $quaternary-color: #f9b233;
     $glass-blur: 20px;
     $border-radius: 16px;
-    $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    $transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
     $glow-intensity: 0 0 20px;
     $shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
-    $shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.2);
 
-    // Mixins
     @mixin glass-effect {
         background: $primary-color;
         backdrop-filter: blur($glass-blur);
@@ -29,304 +27,283 @@ body#home-page {
     }
 
     @mixin hover-transform {
-        transform: translateY(-2px) scale(1.02);
+        transform: translateY(-2px) scale(1.01);
     }
 
-    // Container Principal
     .container {
-        .row {
+        .contain-table {
+            .table-header {
+                text-align: center;
+                margin-bottom: 3rem;
 
-            // .col-xl-3,
-            // .col-md-6 {
-            //     .card {
-            //         border: none;
-            //         margin-bottom: 24px;
-            //         box-shadow: 0 0 13px 0 rgba(236, 236, 241, .44);
-            //     }
-            // }
+                .table-title {
+                    font-size: 3rem;
+                    font-weight: 700;
+                    background: linear-gradient(135deg, $tertiary-color, $tertiary-color);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    margin-bottom: 0.5rem;
+                    text-shadow: $glow-intensity rgba($secondary-color, 0.3);
+                }
 
-            .col-12 {
-                .modern-table-container {
+                .table-subtitle {
+                    color: rgba(255, 255, 255, 0.7);
+                    font-size: 1.2rem;
+                    font-weight: 300;
+                }
+            }
+
+            .table-wrapper {
+                @include glass-effect;
+                border-radius: $border-radius;
+                overflow: hidden;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                transition: $transition;
+                // @include neon-glow(rgba($quaternary-color, 0.2));
+
+                // &:hover {
+                //     @include neon-glow(rgba($secondary-color, 0.2));
+                // }
+
+                .modern-table {
                     width: 100%;
-                    border: 2px solid red;
+                    border-collapse: collapse;
+                    border-spacing: 0;
 
-                    .table-header {
-                        text-align: center;
-                        margin-bottom: 3rem;
+                    thead {
+                        background: $quaternary-color;
 
-                        .table-title {
-                            font-size: 3rem;
-                            font-weight: 700;
-                            background: linear-gradient(135deg, $secondary-color, #fff);
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text;
-                            margin-bottom: 0.5rem;
-                            text-shadow: $glow-intensity rgba($secondary-color, 0.3);
-                        }
+                        tr {
+                            th {
+                                padding: 1.25rem 1.80rem;
+                                text-align: left;
+                                font-weight: 500;
+                                font-size: 14px;
+                                color: #111;
+                                letter-spacing: 0.5px;
+                                border-bottom: 2px solid rgba($secondary-color, 0.3);
+                                position: relative;
 
-                        .table-subtitle {
-                            color: rgba(255, 255, 255, 0.7);
-                            font-size: 1.2rem;
-                            font-weight: 300;
+                                .header-content {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.5rem;
+
+                                    svg {
+                                        color: $secondary-color;
+                                    }
+                                }
+
+                                &:hover {
+                                    background: rgba(#111, 0.1);
+                                    color: #dcdcdc;
+                                    cursor: pointer;
+                                }
+                            }
                         }
                     }
 
-                    .table-wrapper {
-                        @include glass-effect;
-                        border-radius: $border-radius;
-                        overflow: hidden;
-                        box-shadow: $shadow-strong;
-                        transition: $transition;
+                    tbody {
+                        .table-row {
+                            transition: $transition;
+                            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-                        &:hover {
-                            @include neon-glow(rgba($secondary-color, 0.2));
-                            transform: translateY(-4px);
-                        }
+                            &:hover {
+                                @include hover-transform;
 
-                        .modern-table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            border-spacing: 0;
-
-                            thead {
-                                background: linear-gradient(135deg,
-                                        rgba($secondary-color, 0.2),
-                                        rgba($tertiary-color, 0.1));
-
-                                tr {
-                                    th {
-                                        padding: 1.5rem 1rem;
-                                        text-align: left;
-                                        font-weight: 600;
-                                        font-size: 0.95rem;
-                                        color: rgba(255, 255, 255, 0.9);
-                                        text-transform: uppercase;
-                                        letter-spacing: 0.5px;
-                                        border-bottom: 2px solid rgba($secondary-color, 0.3);
-                                        position: relative;
-
-                                        .header-content {
-                                            display: flex;
-                                            align-items: center;
-                                            gap: 0.5rem;
-
-                                            svg {
-                                                color: $secondary-color;
-                                            }
-                                        }
-
-                                        &:hover {
-                                            background: rgba($secondary-color, 0.1);
-                                            color: $secondary-color;
-                                            cursor: pointer;
-                                        }
-                                    }
+                                .progress-fill {
+                                    @include neon-glow($secondary-color);
                                 }
                             }
 
-                            tbody {
-                                .table-row {
-                                    transition: $transition;
-                                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                            td {
+                                padding: 1.25rem 1.80rem;
+                                vertical-align: middle;
+                                color: #b3b3b3;
+                                font-size: 12.5px;
+                                position: relative;
+                                font-weight: 500;
+                                cursor: pointer;
 
-                                    &:hover {
-                                        background: rgba($secondary-color, 0.05);
-                                        @include hover-transform;
-                                        @include neon-glow(rgba($secondary-color, 0.1));
+                                &:first-child {
+                                    border-top-left-radius: 8px;
+                                    border-bottom-left-radius: 8px;
+                                }
 
-                                        .progress-fill {
-                                            @include neon-glow($secondary-color);
+                                &:last-child {
+                                    border-top-right-radius: 8px;
+                                    border-bottom-right-radius: 8px;
+                                }
+
+                                &.project-cell {
+                                    .project-info {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 0.25rem;
+
+                                        .project-name {
+                                            font-weight: 600;
+                                            color: #b3b3b3;
+                                            font-size: 1rem;
+                                        }
+
+                                        .project-id {
+                                            font-size: 0.8rem;
+                                            color: #b3b3b3;
+                                            font-family: 'Monaco', monospace;
                                         }
                                     }
+                                }
 
-                                    td {
-                                        padding: 1.25rem 1rem;
-                                        vertical-align: middle;
-                                        color: rgba(255, 255, 255, 0.8);
-                                        font-size: 0.95rem;
-                                        position: relative;
+                                &.status-cell {
+                                    .status-badge {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.5rem;
+                                        padding: 0.5rem 1rem;
+                                        border-radius: 24px;
+                                        @include glass-effect;
+                                        width: fit-content;
 
-                                        &:first-child {
-                                            border-top-left-radius: 8px;
-                                            border-bottom-left-radius: 8px;
-                                        }
-
-                                        &:last-child {
-                                            border-top-right-radius: 8px;
-                                            border-bottom-right-radius: 8px;
-                                        }
-
-                                        &.project-cell {
-                                            .project-info {
-                                                display: flex;
-                                                flex-direction: column;
-                                                gap: 0.25rem;
-
-                                                .project-name {
-                                                    font-weight: 600;
-                                                    color: rgba(255, 255, 255, 0.95);
-                                                    font-size: 1rem;
-                                                }
-
-                                                .project-id {
-                                                    font-size: 0.8rem;
-                                                    color: rgba(255, 255, 255, 0.5);
-                                                    font-family: 'Monaco', monospace;
-                                                }
-                                            }
-                                        }
-
-                                        &.status-cell {
-                                            .status-badge {
-                                                display: flex;
-                                                align-items: center;
-                                                gap: 0.5rem;
-                                                padding: 0.5rem 1rem;
-                                                border-radius: 24px;
-                                                @include glass-effect;
-                                                width: fit-content;
-
-                                                .status-icon {
-                                                    &.active {
-                                                        color: $tertiary-color;
-                                                    }
-
-                                                    &.progress {
-                                                        color: $secondary-color;
-                                                    }
-
-                                                    &.completed {
-                                                        color: #10b981;
-                                                    }
-
-                                                    &.pending {
-                                                        color: #f59e0b;
-                                                    }
-                                                }
-
-                                                span {
-                                                    font-weight: 500;
-                                                    font-size: 0.85rem;
-                                                }
-                                            }
-                                        }
-
-                                        &.progress-cell {
-                                            width: 200px;
-
-                                            .progress-container {
-                                                display: flex;
-                                                align-items: center;
-                                                gap: 1rem;
-
-                                                .progress-bar {
-                                                    flex: 1;
-                                                    height: 12px;
-                                                    background: rgba(255, 255, 255, 0.1);
-                                                    border-radius: 6px;
-                                                    overflow: hidden;
-                                                    position: relative;
-                                                    @include glass-effect;
-
-                                                    .progress-fill {
-                                                        height: 100%;
-                                                        background: linear-gradient(90deg, $secondary-color, $tertiary-color);
-                                                        border-radius: 6px;
-                                                        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-                                                        position: relative;
-
-                                                        .progress-glow {
-                                                            position: absolute;
-                                                            top: 0;
-                                                            right: 0;
-                                                            width: 20px;
-                                                            height: 100%;
-                                                            background: linear-gradient(90deg,
-                                                                    transparent,
-                                                                    rgba(255, 255, 255, 0.3));
-                                                            animation: shimmer 2s infinite;
-                                                        }
-                                                    }
-                                                }
-
-                                                .progress-text {
-                                                    font-weight: 600;
-                                                    color: $secondary-color;
-                                                    font-size: 0.9rem;
-                                                    min-width: 40px;
-                                                    text-align: right;
-                                                }
-                                            }
-                                        }
-
-                                        &.team-cell {
-                                            .team-info {
-                                                display: flex;
-                                                flex-direction: column;
-                                                align-items: center;
-
-                                                .team-count {
-                                                    font-size: 1.2rem;
-                                                    font-weight: 700;
-                                                    color: rgba(255, 255, 255, 0.9);
-                                                }
-
-                                                .team-label {
-                                                    font-size: 0.75rem;
-                                                    color: rgba(255, 255, 255, 0.5);
-                                                    text-transform: uppercase;
-                                                    letter-spacing: 0.5px;
-                                                }
-                                            }
-                                        }
-
-                                        &.revenue-cell {
-                                            .revenue-amount {
-                                                font-weight: 700;
+                                        .status-icon {
+                                            &.active {
                                                 color: $tertiary-color;
-                                                font-size: 1.1rem;
-                                                text-shadow: $glow-intensity rgba($tertiary-color, 0.3);
+                                            }
+
+                                            &.progress {
+                                                color: $secondary-color;
+                                            }
+
+                                            &.completed {
+                                                color: #10b981;
+                                            }
+
+                                            &.pending {
+                                                color: #f59e0b;
                                             }
                                         }
 
-                                        &.rating-cell {
-                                            .rating-display {
-                                                display: flex;
-                                                align-items: center;
-                                                gap: 0.5rem;
+                                        span {
+                                            font-weight: 500;
+                                            font-size: 0.85rem;
+                                        }
+                                    }
+                                }
 
-                                                .rating-star {
-                                                    color: $secondary-color;
-                                                    fill: $secondary-color;
-                                                }
+                                &.progress-cell {
+                                    width: 200px;
 
-                                                span {
-                                                    font-weight: 600;
-                                                    color: rgba(255, 255, 255, 0.9);
+                                    .progress-container {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 1rem;
+
+                                        .progress-bar {
+                                            flex: 1;
+                                            height: 12px;
+                                            background: rgba(255, 255, 255, 0.1);
+                                            border-radius: 6px;
+                                            overflow: hidden;
+                                            position: relative;
+                                            @include glass-effect;
+
+                                            .progress-fill {
+                                                height: 100%;
+                                                background: linear-gradient(90deg, $secondary-color, $tertiary-color);
+                                                border-radius: 6px;
+                                                transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+                                                position: relative;
+
+                                                .progress-glow {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    right: 0;
+                                                    width: 20px;
+                                                    height: 100%;
+                                                    background: linear-gradient(90deg,
+                                                            transparent,
+                                                            rgba(255, 255, 255, 0.3));
+                                                    animation: shimmer 2s infinite;
                                                 }
                                             }
                                         }
 
-                                        &.category-cell {
-                                            .category-tag {
-                                                display: inline-block;
-                                                padding: 0.5rem 1rem;
-                                                background: rgba($tertiary-color, 0.2);
-                                                color: $tertiary-color;
-                                                border-radius: 20px;
-                                                font-size: 0.8rem;
-                                                font-weight: 500;
-                                                text-transform: uppercase;
-                                                letter-spacing: 0.5px;
-                                                border: 1px solid rgba($tertiary-color, 0.3);
-                                                transition: $transition;
+                                        .progress-text {
+                                            font-weight: 600;
+                                            color: #b3b3b3;
+                                            font-size: 0.9rem;
+                                            min-width: 40px;
+                                            text-align: right;
+                                        }
+                                    }
+                                }
 
-                                                &:hover {
-                                                    background: rgba($tertiary-color, 0.3);
-                                                    @include neon-glow($tertiary-color);
-                                                }
-                                            }
+                                &.team-cell {
+                                    .team-info {
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center;
+
+                                        .team-count {
+                                            font-size: 1.2rem;
+                                            font-weight: 700;
+                                            color: rgba(255, 255, 255, 0.9);
+                                        }
+
+                                        .team-label {
+                                            font-size: 0.75rem;
+                                            color: rgba(255, 255, 255, 0.5);
+                                            text-transform: uppercase;
+                                            letter-spacing: 0.5px;
+                                        }
+                                    }
+                                }
+
+                                &.revenue-cell {
+                                    .revenue-amount {
+                                        font-weight: 700;
+                                        color: $tertiary-color;
+                                        font-size: 1.1rem;
+                                        text-shadow: $glow-intensity rgba($tertiary-color, 0.3);
+                                    }
+                                }
+
+                                &.rating-cell {
+                                    .rating-display {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.5rem;
+
+                                        .rating-star {
+                                            color: $secondary-color;
+                                            fill: $secondary-color;
+                                        }
+
+                                        span {
+                                            font-weight: 600;
+                                            color: rgba(255, 255, 255, 0.9);
+                                        }
+                                    }
+                                }
+
+                                &.category-cell {
+                                    .category-tag {
+                                        display: inline-block;
+                                        padding: 0.5rem 1rem;
+                                        background: rgba($tertiary-color, 0.2);
+                                        color: $tertiary-color;
+                                        border-radius: 20px;
+                                        font-size: 0.8rem;
+                                        font-weight: 500;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.5px;
+                                        border: 1px solid rgba($tertiary-color, 0.3);
+                                        transition: $transition;
+
+                                        &:hover {
+                                            background: rgba($tertiary-color, 0.3);
+                                            @include neon-glow($tertiary-color);
                                         }
                                     }
                                 }

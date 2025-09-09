@@ -41,7 +41,7 @@ export default function Home() {
         },
         {
             id: 3,
-            name: "Multipurpose Landing Template",
+            name: "M Template",
             startDate: "2019-06-06",
             status: "Completed",
             team: [
@@ -127,124 +127,120 @@ export default function Home() {
             </div>
 
             {/* Tabela de projetos */}
-            <div className="row">
-                <div className="col-12">
-                    <div className="modern-table-container">
-                        <div className="table-header">
-                            <h1 className="table-title">New Line Tecnologia</h1>
-                            <p className="table-subtitle">Métricas de Esteira</p>
-                        </div>
-                        
-                        <div className="table-wrapper">
-                                                        <table className="modern-table" role="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Project</span>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Start Date</span>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Status</span>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Team</span>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Progress</span>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div className="header-content">
-                                                <span>Actions</span>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredProjects.map((p) => (
-                                        <tr key={p.id} className="table-row">
-                                            <td className="project-cell">
-                                                <div className="project-info">
-                                                    <span className="project-name">{p.name}</span>
-                                                    <span className="project-id">ID: {p.id}</span>
+            <div className="contain-table">
+                <div className="table-header">
+                    <h1 className="table-title">New Line Tecnologia</h1>
+                    <p className="table-subtitle">Métricas de Esteira</p>
+                </div>
+
+                <div className="table-wrapper">
+                    <table className="modern-table" role="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Project</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Start Date</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Status</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Team</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Progress</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div className="header-content">
+                                        <span>Actions</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredProjects.map((p) => (
+                                <tr key={p.id} className="table-row">
+                                    <td className="project-cell">
+                                        <div className="project-info">
+                                            <span className="project-name">{p.name}</span>
+                                            <span className="project-id">ID: {p.id}</span>
+                                        </div>
+                                    </td>
+                                    <td className="date-cell">
+                                        <time dateTime={p.startDate}>
+                                            {new Date(p.startDate).toLocaleDateString("pt-BR")}
+                                        </time>
+                                    </td>
+                                    <td className="status-cell">
+                                        <div className="status-badge">
+                                            {p.status === "Completed" ? (
+                                                <span className="text-success">
+                                                    <i className="fa fa-circle me-1"></i> Completed
+                                                </span>
+                                            ) : (
+                                                <span className="text-primary">
+                                                    <i className="fa fa-circle me-1"></i> Pending
+                                                </span>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="team-cell">
+                                        <div className="team-avatars">
+                                            {p.team.map((avatar, idx) => (
+                                                <img
+                                                    key={idx}
+                                                    src={avatar}
+                                                    alt={`Team member ${idx + 1}`}
+                                                    className="rounded-circle mr-2"
+                                                    style={{ width: "36px", height: "36px" }}
+                                                    loading="lazy"
+                                                />
+                                            ))}
+                                        </div>
+                                    </td>
+                                    <td className="progress-cell">
+                                        <div className="progress-container">
+                                            <div className="progress-bar" style={{ height: "6px" }}>
+                                                <div
+                                                    className={`progress-fill ${p.progress === 100 ? "bg-success" : "bg-primary"}`}
+                                                    role="progressbar"
+                                                    style={{ width: `${p.progress}%` }}
+                                                    aria-valuenow={p.progress}
+                                                    aria-valuemin={0}
+                                                    aria-valuemax={100}
+                                                >
+                                                    <div className="progress-glow"></div>
                                                 </div>
-                                            </td>
-                                            <td className="date-cell">
-                                                <time dateTime={p.startDate}>
-                                                    {new Date(p.startDate).toLocaleDateString("pt-BR")}
-                                                </time>
-                                            </td>
-                                            <td className="status-cell">
-                                                <div className="status-badge">
-                                                    {p.status === "Completed" ? (
-                                                        <span className="text-success">
-                                                            <i className="fa fa-circle me-1"></i> Completed
-                                                        </span>
-                                                    ) : (
-                                                        <span className="text-primary">
-                                                            <i className="fa fa-circle me-1"></i> Pending
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </td>
-                                            <td className="team-cell">
-                                                <div className="team-avatars">
-                                                    {p.team.map((avatar, idx) => (
-                                                        <img
-                                                            key={idx}
-                                                            src={avatar}
-                                                            alt={`Team member ${idx + 1}`}
-                                                            className="rounded-circle mr-2"
-                                                            style={{ width: "36px", height: "36px" }}
-                                                            loading="lazy"
-                                                        />
-                                                    ))}
-                                                </div>
-                                            </td>
-                                            <td className="progress-cell">
-                                                <div className="progress-container">
-                                                    <div className="progress-bar" style={{ height: "6px" }}>
-                                                        <div
-                                                            className={`progress-fill ${p.progress === 100 ? "bg-success" : "bg-primary"}`}
-                                                            role="progressbar"
-                                                            style={{ width: `${p.progress}%` }}
-                                                            aria-valuenow={p.progress}
-                                                            aria-valuemin={0}
-                                                            aria-valuemax={100}
-                                                        >
-                                                            <div className="progress-glow"></div>
-                                                        </div>
-                                                    </div>
-                                                    <span className="progress-text">{p.progress}%</span>
-                                                </div>
-                                            </td>
-                                            <td className="actions-cell">
-                                                <div className="d-flex gap-2">
-                                                    <button className="btn btn-link text-success p-0">
-                                                        <i className="fa fa-pencil"></i>
-                                                    </button>
-                                                    <button className="btn btn-link text-danger p-0">
-                                                        <i className="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                            </div>
+                                            <span className="progress-text">{p.progress}%</span>
+                                        </div>
+                                    </td>
+                                    <td className="actions-cell">
+                                        <div className="d-flex gap-2">
+                                            <button className="btn btn-link text-success p-0">
+                                                <i className="fa fa-pencil"></i>
+                                            </button>
+                                            <button className="btn btn-link text-danger p-0">
+                                                <i className="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

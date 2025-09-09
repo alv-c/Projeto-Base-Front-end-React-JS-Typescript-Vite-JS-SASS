@@ -129,10 +129,10 @@ export default function Home() {
             {/* Tabela de projetos */}
             <div className="row">
                 <div className="col-12">
-                    <div className="modern-table-container card shadow-sm">
+                    <div className="modern-table-container">
                         <div className="table-header">
-                            <h1 className="table-title">Project Analytics Dashboard</h1>
-                            <p className="table-subtitle">Real-time project performance metrics</p>
+                            <h1 className="table-title">New Line Tecnologia</h1>
+                            <p className="table-subtitle">Métricas de Esteira</p>
                         </div>
                         
                         <div className="table-wrapper">

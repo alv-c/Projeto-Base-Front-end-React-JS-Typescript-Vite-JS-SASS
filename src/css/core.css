@@ -7,6 +7,38 @@ body {
   font-style: normal;
 }
 
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes puff-in-ver {
+  0% {
+    -webkit-transform: scaleY(2);
+    transform: scaleY(2);
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
 /**
     * =================================== PAGINAS ===================================
     */
@@ -15,26 +47,53 @@ body#home-page {
   min-height: 100dvh;
   padding: 30px 0 50px;
 }
-body#home-page .container .contain-table .table-header {
+body#home-page .container-fluid .contain-table .table-header {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding-bottom: 45px;
+}
+body#home-page .container-fluid .contain-table .table-header div.contain-subtitulo-split {
+  padding-bottom: 5px;
+}
+body#home-page .container-fluid .contain-table .table-header div.contain-subtitulo-split > span {
+  display: block;
   text-align: center;
-  margin-bottom: 3rem;
-}
-body#home-page .container .contain-table .table-header .table-title {
-  font-size: 3rem;
+  font-size: 16px;
+  text-transform: uppercase;
   font-weight: 700;
-  background: linear-gradient(135deg, #228b22, #228b22);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(0, 46, 23, 0.3);
+  letter-spacing: 1px;
+  color: #f9b233;
+  animation: puff-in-ver 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  animation-delay: 2s;
 }
-body#home-page .container .contain-table .table-header .table-subtitle {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.2rem;
-  font-weight: 300;
+body#home-page .container-fluid .contain-table .table-header div.split-text-container {
+  position: relative;
+  display: flex;
+  font-size: 5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  overflow: hidden;
 }
-body#home-page .container .contain-table .table-wrapper {
+body#home-page .container-fluid .contain-table .table-header div.split-text-container > span.text-part {
+  display: inline-block;
+  position: relative;
+  transform: translateX(0);
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  line-height: 65px;
+}
+body#home-page .container-fluid .contain-table .table-header div.split-text-container > span.text-part.left {
+  transform: translateX(-200%);
+  animation-name: slide-in-left;
+}
+body#home-page .container-fluid .contain-table .table-header div.split-text-container > span.text-part.right {
+  transform: translateX(200%);
+  animation-name: slide-in-right;
+}
+body#home-page .container-fluid .contain-table .table-wrapper {
   background: rgba(0, 0, 0, 0.3019607843);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -44,15 +103,15 @@ body#home-page .container .contain-table .table-wrapper {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table thead {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table thead {
   background: #f9b233;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table thead tr th {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table thead tr th {
   padding: 1.25rem 1.8rem;
   text-align: left;
   font-weight: 500;
@@ -62,30 +121,30 @@ body#home-page .container .contain-table .table-wrapper .modern-table thead tr t
   border-bottom: 2px solid rgba(0, 46, 23, 0.3);
   position: relative;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table thead tr th .header-content {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table thead tr th .header-content {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table thead tr th .header-content svg {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table thead tr th .header-content svg {
   color: #002e17;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table thead tr th:hover {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table thead tr th:hover {
   background: rgba(17, 17, 17, 0.1);
   color: #dcdcdc;
   cursor: pointer;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row:hover {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row:hover {
   transform: translateY(-2px) scale(1.01);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row:hover .progress-fill {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row:hover .progress-fill {
   box-shadow: 0 0 20px #002e17, inset 0 0 10px rgba(0, 46, 23, 0.2);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td {
   padding: 1.25rem 1.8rem;
   vertical-align: middle;
   color: #b3b3b3;
@@ -94,30 +153,30 @@ body#home-page .container .contain-table .table-wrapper .modern-table tbody .tab
   font-weight: 500;
   cursor: pointer;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td:first-child {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td:first-child {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td:last-child {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td:last-child {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info .project-name {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info .project-name {
   font-weight: 600;
   color: #b3b3b3;
   font-size: 1rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info .project-id {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.project-cell .project-info .project-id {
   font-size: 0.8rem;
   color: #b3b3b3;
   font-family: "Monaco", monospace;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -129,31 +188,31 @@ body#home-page .container .contain-table .table-wrapper .modern-table tbody .tab
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: fit-content;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.active {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.active {
   color: #228b22;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.progress {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.progress {
   color: #002e17;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.completed {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.completed {
   color: #10b981;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.pending {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge .status-icon.pending {
   color: #f59e0b;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge span {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.status-cell .status-badge span {
   font-weight: 500;
   font-size: 0.85rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell {
   width: 200px;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar {
   flex: 1;
   height: 12px;
   background: rgba(255, 255, 255, 0.1);
@@ -165,14 +224,14 @@ body#home-page .container .contain-table .table-wrapper .modern-table tbody .tab
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar .progress-fill {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #002e17, #228b22);
   border-radius: 6px;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar .progress-fill .progress-glow {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-bar .progress-fill .progress-glow {
   position: absolute;
   top: 0;
   right: 0;
@@ -181,49 +240,49 @@ body#home-page .container .contain-table .table-wrapper .modern-table tbody .tab
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
   animation: shimmer 2s infinite;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-text {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.progress-cell .progress-container .progress-text {
   font-weight: 600;
   color: #b3b3b3;
   font-size: 0.9rem;
   min-width: 40px;
   text-align: right;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info .team-count {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info .team-count {
   font-size: 1.2rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.9);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info .team-label {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.team-cell .team-info .team-label {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.revenue-cell .revenue-amount {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.revenue-cell .revenue-amount {
   font-weight: 700;
   color: #228b22;
   font-size: 1.1rem;
   text-shadow: 0 0 20px rgba(34, 139, 34, 0.3);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display .rating-star {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display .rating-star {
   color: #002e17;
   fill: #002e17;
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display span {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.rating-cell .rating-display span {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.category-cell .category-tag {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.category-cell .category-tag {
   display: inline-block;
   padding: 0.5rem 1rem;
   background: rgba(34, 139, 34, 0.2);
@@ -236,7 +295,7 @@ body#home-page .container .contain-table .table-wrapper .modern-table tbody .tab
   border: 1px solid rgba(34, 139, 34, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-body#home-page .container .contain-table .table-wrapper .modern-table tbody .table-row td.category-cell .category-tag:hover {
+body#home-page .container-fluid .contain-table .table-wrapper .modern-table tbody .table-row td.category-cell .category-tag:hover {
   background: rgba(34, 139, 34, 0.3);
   box-shadow: 0 0 20px #228b22, inset 0 0 10px rgba(34, 139, 34, 0.2);
 }

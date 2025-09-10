@@ -63,76 +63,17 @@ export default function Home() {
     );
 
     return (
-        <div className="container mt-4">
-            {/* Cards superiores */}
-            <div className="row mb-4">
-                <div className="col-xl-3 col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-body d-flex justify-content-between">
-                            <div>
-                                <h5 className="h3">24</h5>
-                                <p className="text-muted mb-0">Total Projects</p>
-                            </div>
-                            <i className="fa fa-archive text-primary h4"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-xl-3 col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-body d-flex justify-content-between">
-                            <div>
-                                <h5 className="h3">18</h5>
-                                <p className="text-muted mb-0">Completed Projects</p>
-                            </div>
-                            <i className="fa fa-th text-primary h4"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-xl-3 col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-body d-flex justify-content-between">
-                            <div>
-                                <h5 className="h3">06</h5>
-                                <p className="text-muted mb-0">Pending Projects</p>
-                            </div>
-                            <i className="fa fa-file text-primary h4"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-xl-3 col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <label htmlFor="search">Search</label>
-                            <div className="input-group">
-                                <input
-                                    id="search"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Search..."
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                />
-                                <div className="input-group-append">
-                                    <button className="btn btn-danger" type="button">
-                                        <i className="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Tabela de projetos */}
+        <div className="container-fluid mt-4">
             <div className="contain-table">
                 <div className="table-header">
-                    <h1 className="table-title">New Line Tecnologia</h1>
-                    <p className="table-subtitle">Métricas de Esteira</p>
+                    <div className="contain-subtitulo-split">
+                        <span>WorkFlow Tracker</span>
+                    </div>
+                    <div className="split-text-container">
+                        <span className="text-part left">New</span>
+                        <span className="text-part right">Line</span>
+                    </div>
                 </div>
-
                 <div className="table-wrapper">
                     <table className="modern-table" role="table">
                         <thead>

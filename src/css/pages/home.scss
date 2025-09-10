@@ -1,34 +1,24 @@
 @use './../includes/variaveis' as var;
 
+@mixin glass-effect {
+    background: var.$primary-color;
+    backdrop-filter: blur(var.$glass-blur);
+    -webkit-backdrop-filter: blur(var.$glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin neon-glow($color) {
+    box-shadow: var.$glow-intensity $color, inset 0 0 10px rgba($color, 0.2);
+}
+
+@mixin hover-transform {
+    transform: translateY(-2px) scale(1.01);
+}
+
 body#home-page {
     background: #111;
     min-height: 100dvh;
     padding: 30px 0 50px;
-
-    $primary-color: #0000004d;
-    $secondary-color: #002e17;
-    $tertiary-color: #228b22;
-    $quaternary-color: #f9b233;
-    $glass-blur: 20px;
-    $border-radius: 16px;
-    $transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-    $glow-intensity: 0 0 20px;
-    $shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
-
-    @mixin glass-effect {
-        background: $primary-color;
-        backdrop-filter: blur($glass-blur);
-        -webkit-backdrop-filter: blur($glass-blur);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    @mixin neon-glow($color) {
-        box-shadow: $glow-intensity $color, inset 0 0 10px rgba($color, 0.2);
-    }
-
-    @mixin hover-transform {
-        transform: translateY(-2px) scale(1.01);
-    }
 
     .container-fluid {
         .contain-table {
@@ -48,7 +38,7 @@ body#home-page {
                         text-transform: uppercase;
                         font-weight: 700;
                         letter-spacing: 1px;
-                        color: $quaternary-color;
+                        color: var.$quaternary-color;
                         animation: puff-in-ver 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
                         animation-delay: 2s;
                     }
@@ -87,14 +77,14 @@ body#home-page {
 
             .table-wrapper {
                 @include glass-effect;
-                border-radius: $border-radius;
+                border-radius: var.$border-radius;
                 overflow: hidden;
                 box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-                transition: $transition;
-                // @include neon-glow(rgba($quaternary-color, 0.2));
+                transition: var.$transition;
+                // @include neon-glow(rgba(var.$quaternary-color, 0.2));
 
                 // &:hover {
-                //     @include neon-glow(rgba($secondary-color, 0.2));
+                //     @include neon-glow(rgba(var.$secondary-color, 0.2));
                 // }
 
                 .modern-table {
@@ -103,7 +93,7 @@ body#home-page {
                     border-spacing: 0;
 
                     thead {
-                        background: $quaternary-color;
+                        background: var.$quaternary-color;
 
                         tr {
                             th {
@@ -113,7 +103,7 @@ body#home-page {
                                 font-size: 14px;
                                 color: #111;
                                 letter-spacing: 0.5px;
-                                border-bottom: 2px solid rgba($secondary-color, 0.3);
+                                border-bottom: 2px solid rgba(var.$secondary-color, 0.3);
                                 position: relative;
 
                                 .header-content {
@@ -122,7 +112,7 @@ body#home-page {
                                     gap: 0.5rem;
 
                                     svg {
-                                        color: $secondary-color;
+                                        color: var.$secondary-color;
                                     }
                                 }
 
@@ -137,14 +127,14 @@ body#home-page {
 
                     tbody {
                         .table-row {
-                            transition: $transition;
+                            transition: var.$transition;
                             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
                             &:hover {
                                 @include hover-transform;
 
                                 .progress-fill {
-                                    @include neon-glow($secondary-color);
+                                    @include neon-glow(var.$secondary-color);
                                 }
                             }
 
@@ -199,11 +189,11 @@ body#home-page {
 
                                         .status-icon {
                                             &.active {
-                                                color: $tertiary-color;
+                                                color: var.$tertiary-color;
                                             }
 
                                             &.progress {
-                                                color: $secondary-color;
+                                                color: var.$secondary-color;
                                             }
 
                                             &.completed {
@@ -241,7 +231,7 @@ body#home-page {
 
                                             .progress-fill {
                                                 height: 100%;
-                                                background: linear-gradient(90deg, $secondary-color, $tertiary-color);
+                                                background: linear-gradient(90deg, var.$secondary-color, var.$tertiary-color);
                                                 border-radius: 6px;
                                                 transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
                                                 position: relative;
@@ -294,9 +284,9 @@ body#home-page {
                                 &.revenue-cell {
                                     .revenue-amount {
                                         font-weight: 700;
-                                        color: $tertiary-color;
+                                        color: var.$tertiary-color;
                                         font-size: 1.1rem;
-                                        text-shadow: $glow-intensity rgba($tertiary-color, 0.3);
+                                        text-shadow: var.$glow-intensity rgba(var.$tertiary-color, 0.3);
                                     }
                                 }
 
@@ -307,8 +297,8 @@ body#home-page {
                                         gap: 0.5rem;
 
                                         .rating-star {
-                                            color: $secondary-color;
-                                            fill: $secondary-color;
+                                            color: var.$secondary-color;
+                                            fill: var.$secondary-color;
                                         }
 
                                         span {
@@ -322,19 +312,19 @@ body#home-page {
                                     .category-tag {
                                         display: inline-block;
                                         padding: 0.5rem 1rem;
-                                        background: rgba($tertiary-color, 0.2);
-                                        color: $tertiary-color;
+                                        background: rgba(var.$tertiary-color, 0.2);
+                                        color: var.$tertiary-color;
                                         border-radius: 20px;
                                         font-size: 0.8rem;
                                         font-weight: 500;
                                         text-transform: uppercase;
                                         letter-spacing: 0.5px;
-                                        border: 1px solid rgba($tertiary-color, 0.3);
-                                        transition: $transition;
+                                        border: 1px solid rgba(var.$tertiary-color, 0.3);
+                                        transition: var.$transition;
 
                                         &:hover {
-                                            background: rgba($tertiary-color, 0.3);
-                                            @include neon-glow($tertiary-color);
+                                            background: rgba(var.$tertiary-color, 0.3);
+                                            @include neon-glow(var.$tertiary-color);
                                         }
                                     }
                                 }
@@ -361,11 +351,11 @@ body#home-page {
 
         0%,
         100% {
-            box-shadow: $glow-intensity rgba($secondary-color, 0.2);
+            box-shadow: var.$glow-intensity rgba(var.$secondary-color, 0.2);
         }
 
         50% {
-            box-shadow: $glow-intensity rgba($secondary-color, 0.4);
+            box-shadow: var.$glow-intensity rgba(var.$secondary-color, 0.4);
         }
     }
 

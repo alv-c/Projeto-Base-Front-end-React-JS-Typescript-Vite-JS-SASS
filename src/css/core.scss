@@ -5,9 +5,10 @@
 @use './includes/global';
 @use './includes/variaveis' as *;
 @use './includes/animacoes';
+@use './includes/mixins';
 
 /**
-    * =================================== PAGINAS ===================================
-    */
+* =================================== PAGINAS ===================================
+*/
 
 @use './pages/home';

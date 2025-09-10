@@ -1,0 +1,14 @@
+@mixin glass-effect {
+    background: var.$primary-color;
+    backdrop-filter: blur(var.$glass-blur);
+    -webkit-backdrop-filter: blur(var.$glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin neon-glow($color) {
+    box-shadow: var.$glow-intensity $color, inset 0 0 10px rgba($color, 0.2);
+}
+
+@mixin hover-transform {
+    transform: translateY(-2px) scale(1.01);
+}
